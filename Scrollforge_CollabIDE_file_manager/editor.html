@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scrollforge IDE - Collaboration</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js">
+    function saveCode() {
+      const code = editor.getValue();
+      const key = "scrollforge-" + (room || "default");
+      localStorage.setItem(key, code);
+      alert("Code saved!");
+    }
+
+    function loadCode() {
+      const key = "scrollforge-" + (room || "default");
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        editor.setValue(saved);
+        updatePreview(saved);
+        alert("Code loaded.");
+      } else {
+        alert("No saved code found.");
+      }
+    }
+    
+    function downloadCode() {
+      const blob = new Blob([editor.getValue()], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      const ext = editor.getOption('mode') === 'htmlmixed' ? '.html' :
+                  editor.getOption('mode') === 'javascript' ? '.js' : '.txt';
+      link.download = "scrollforge_code" + ext;
+      link.click();
+    }
+    
+    document.getElementById("upload-file").addEventListener("change", function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        editor.setValue(e.target.result);
+        updatePreview(e.target.result);
+      };
+      reader.readAsText(file);
+    });
+    
+    function loadAndRun(filename) {
+      fetch("files/" + filename)
+        .then(res => res.text())
+        .then(code => {
+          editor.setValue(code);
+          updatePreview(code);
+        })
+        .catch(() => alert("Failed to load file."));
+    }
+
+    function deleteFile(filename) {
+      const fileList = document.getElementById("file-list");
+      const items = fileList.getElementsByTagName("li");
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].innerText.includes(filename)) {
+          fileList.removeChild(items[i]);
+          break;
+        }
+      }
+    }
+    </script>
+    
+    
+    
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js">
+    function saveCode() {
+      const code = editor.getValue();
+      const key = "scrollforge-" + (room || "default");
+      localStorage.setItem(key, code);
+      alert("Code saved!");
+    }
+
+    function loadCode() {
+      const key = "scrollforge-" + (room || "default");
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        editor.setValue(saved);
+        updatePreview(saved);
+        alert("Code loaded.");
+      } else {
+        alert("No saved code found.");
+      }
+    }
+    
+    function downloadCode() {
+      const blob = new Blob([editor.getValue()], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      const ext = editor.getOption('mode') === 'htmlmixed' ? '.html' :
+                  editor.getOption('mode') === 'javascript' ? '.js' : '.txt';
+      link.download = "scrollforge_code" + ext;
+      link.click();
+    }
+    
+    document.getElementById("upload-file").addEventListener("change", function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        editor.setValue(e.target.result);
+        updatePreview(e.target.result);
+      };
+      reader.readAsText(file);
+    });
+    
+    function loadAndRun(filename) {
+      fetch("files/" + filename)
+        .then(res => res.text())
+        .then(code => {
+          editor.setValue(code);
+          updatePreview(code);
+        })
+        .catch(() => alert("Failed to load file."));
+    }
+
+    function deleteFile(filename) {
+      const fileList = document.getElementById("file-list");
+      const items = fileList.getElementsByTagName("li");
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].innerText.includes(filename)) {
+          fileList.removeChild(items[i]);
+          break;
+        }
+      }
+    }
+    </script>
+    
+    
+    
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js">
+    function saveCode() {
+      const code = editor.getValue();
+      const key = "scrollforge-" + (room || "default");
+      localStorage.setItem(key, code);
+      alert("Code saved!");
+    }
+
+    function loadCode() {
+      const key = "scrollforge-" + (room || "default");
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        editor.setValue(saved);
+        updatePreview(saved);
+        alert("Code loaded.");
+      } else {
+        alert("No saved code found.");
+      }
+    }
+    
+    function downloadCode() {
+      const blob = new Blob([editor.getValue()], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      const ext = editor.getOption('mode') === 'htmlmixed' ? '.html' :
+                  editor.getOption('mode') === 'javascript' ? '.js' : '.txt';
+      link.download = "scrollforge_code" + ext;
+      link.click();
+    }
+    
+    document.getElementById("upload-file").addEventListener("change", function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        editor.setValue(e.target.result);
+        updatePreview(e.target.result);
+      };
+      reader.readAsText(file);
+    });
+    
+    function loadAndRun(filename) {
+      fetch("files/" + filename)
+        .then(res => res.text())
+        .then(code => {
+          editor.setValue(code);
+          updatePreview(code);
+        })
+        .catch(() => alert("Failed to load file."));
+    }
+
+    function deleteFile(filename) {
+      const fileList = document.getElementById("file-list");
+      const items = fileList.getElementsByTagName("li");
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].innerText.includes(filename)) {
+          fileList.removeChild(items[i]);
+          break;
+        }
+      }
+    }
+    </script>
+    
+    
+    
+    
+</head>
+<body>
+  <header>
+    <div class="logo">🌀 Scrollforge</div>
+    <div class="controls">
+      <input type="file" id="avatar-upload" accept="image/*" />
+      <span id="room-name">Room: None</span>
+      <button onclick="saveCode()">💾 Save</button><button onclick="loadCode()">📂 Load</button><input type="file" id="upload-file" style="display:none;" /><button onclick="document.getElementById('upload-file').click()">📤 Upload</button><button onclick="downloadCode()">⬇ Download</button><button onclick="runCode()">▶ Run</button>
+    </div>
+  </header>
+
+  <div id="layout">
+    <aside id="file-list">
+      <h3>📁 Files</h3>
+      <ul>
+        <li onclick="loadFile('index.html')">index.html</li>
+        <li onclick="loadFile('main.js')">main.js</li>
+      </ul>
+    </aside>
+
+    <main>
+      <textarea id="editor"></textarea>
+      <iframe id="preview"></iframe>
+    </main>
+
+    <aside id="chat-sidebar">
+      <div id="profile">
+        <img id="avatar" src="avatars/default.png" alt="avatar">
+        <input id="username" placeholder="Your Name" />
+      </div>
+      
+    <div id="online-users">
+      <h4>Online Users</h4>
+      <ul id="user-list">
+        <li><img src="avatars/default.png"> <span>👩‍💻 Alex</span></li>
+        <li><img src="avatars/default.png"> <span>🧑‍💻 Jamie</span></li>
+        <li><img src="avatars/default.png"> <span>👨‍💻 Sam</span></li>
+      </ul>
+    </div>
+    <div id="chat-log"></div>
+    
+      <input id="chat-input" placeholder="Type a message..." onkeypress="sendMessage(event)" />
+    </aside>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const room = urlParams.get('room');
+    document.getElementById("room-name").innerText = "Room: " + (room || "None");
+
+    let editor;
+    window.onload = () => {
+      editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+        lineNumbers: true,
+        mode: 'htmlmixed',
+        theme: 'dracula'
+      });
+
+      editor.on('change', () => {
+        updatePreview(editor.getValue());
+      });
+
+      loadFile('index.html');
+    };
+
+    function loadFile(name) {
+      fetch('files/' + name)
+        .then(res => res.text())
+        .then(code => editor.setValue(code));
+    }
+
+    function updatePreview(code) {
+      const doc = document.getElementById('preview').contentWindow.document;
+      doc.open();
+      doc.write(code);
+      doc.close();
+    }
+
+    function runCode() {
+      updatePreview(editor.getValue());
+    }
+
+    function sendMessage(e) {
+      if (e.key === "Enter") {
+        const name = document.getElementById("username").value || "Anon";
+        const msg = document.getElementById("chat-input").value;
+        if (!msg) return;
+        const chatLog = document.getElementById("chat-log");
+        const entry = document.createElement("div");
+        entry.textContent = name + ": " + msg;
+        chatLog.appendChild(entry);
+        document.getElementById("chat-input").value = "";
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+    }
+
+    document.getElementById("avatar-upload").addEventListener("change", function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById("avatar").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  
+    function saveCode() {
+      const code = editor.getValue();
+      const key = "scrollforge-" + (room || "default");
+      localStorage.setItem(key, code);
+      alert("Code saved!");
+    }
+
+    function loadCode() {
+      const key = "scrollforge-" + (room || "default");
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        editor.setValue(saved);
+        updatePreview(saved);
+        alert("Code loaded.");
+      } else {
+        alert("No saved code found.");
+      }
+    }
+    
+    function downloadCode() {
+      const blob = new Blob([editor.getValue()], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      const ext = editor.getOption('mode') === 'htmlmixed' ? '.html' :
+                  editor.getOption('mode') === 'javascript' ? '.js' : '.txt';
+      link.download = "scrollforge_code" + ext;
+      link.click();
+    }
+    
+    document.getElementById("upload-file").addEventListener("change", function() {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        editor.setValue(e.target.result);
+        updatePreview(e.target.result);
+      };
+      reader.readAsText(file);
+    });
+    
+    function loadAndRun(filename) {
+      fetch("files/" + filename)
+        .then(res => res.text())
+        .then(code => {
+          editor.setValue(code);
+          updatePreview(code);
+        })
+        .catch(() => alert("Failed to load file."));
+    }
+
+    function deleteFile(filename) {
+      const fileList = document.getElementById("file-list");
+      const items = fileList.getElementsByTagName("li");
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].innerText.includes(filename)) {
+          fileList.removeChild(items[i]);
+          break;
+        }
+      }
+    }
+    </script>
+    
+    
+    
+    
+</body>
+</html>
