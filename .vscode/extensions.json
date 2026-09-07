@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "eg2.vscode-npm-script",
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+    "ms-vscode.vscode-typescript-next"
+  ]
+}
