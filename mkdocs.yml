@@ -1,21 +1,9 @@
-site_name: ForgeX Docs
-site_description: Documentation for ForgeX (KristonIde)
-site_author: ThisiskrisG
-
+site_name: Scrollforge Docs
+repo_name: ForgeX
 nav:
   - Home: index.md
-  - Intro: intro.MD
-  - Technology Stack: 02-Technology-Stack.md
-  - Setup & Development: 03-Setup.md
-  - Project Structure: 04-Project-Structure.md
-
+  - Intro: intro.md
+  - Technology: 02-Technology-Stack.md
 theme:
   name: material
-  palette:
-    primary: indigo
-    accent: indigo
 
-extra:
-  social:
-    - type: github
-      link: https://github.com/ThisiskrisG/ForgeX
