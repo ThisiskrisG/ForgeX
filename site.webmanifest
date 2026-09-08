@@ -1,0 +1,27 @@
+{
+  "name": "ForgeX",
+  "short_name": "ForgeX",
+  "description": "ForgeX — Build. Ship. Forge X.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#222228",
+  "theme_color": "#FF6A00",
+  "icons": [
+    {
+      "src": "/icons/forge-x-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/forge-x-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/forge-x-square.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
