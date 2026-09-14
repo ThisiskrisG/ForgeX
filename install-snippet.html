@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ForgeX — Install demo</title>
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#FF6A00" />
+  <link rel="apple-touch-icon" href="/assets/icons/icon-192.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <style>
+    #a2hs-button{display:none;position:fixed;right:16px;bottom:24px;padding:10px 14px;background:#FF6A00;color:#fff;border:none;border-radius:8px;z-index:9999}
+    #ios-banner{display:none;position:fixed;left:16px;bottom:24px;padding:10px 14px;background:#222;color:#fff;border-radius:8px;z-index:9998}
+  </style>
+</head>
+<body>
+  <button id="a2hs-button">Install ForgeX</button>
+  <div id="ios-banner">iOS: tap Share → Add to Home Screen</div>
+
+  <script>
+    // Service worker registration (silent)
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').catch(()=>{});
+    }
+    // beforeinstallprompt handler
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('a2hs-button').style.display = 'inline-block';
+    });
+    document.getElementById('a2hs-button').addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      document.getElementById('a2hs-button').style.display = 'none';
+    });
+    // iOS fallback
+    const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isInStandalone = ('standalone' in navigator) && navigator.standalone;
+    if (isIos && !isInStandalone) {
+      document.getElementById('ios-banner').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

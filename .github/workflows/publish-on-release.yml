@@ -1,0 +1,52 @@
+name: Publish on release
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+        continue-on-error: true
+
+      - name: Build (if build script exists)
+        run: npm run build --if-present
+        continue-on-error: true
+
+      - name: Create A2HS zip artifact
+        run: |
+          zip -r a2hs-files.zip manifest.json service-worker.js install-snippet.html README_A2HS.md assets || true
+        continue-on-error: true
+
+      - name: Upload release artifact
+        if: github.event.release != null
+        uses: softprops/action-gh-release@v1
+        with:
+          files: a2hs-files.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to npm
+        if: secrets.NPM_TOKEN != ''
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish --access public
+
+      - name: Publish to GitHub Packages (npm)
+        if: secrets.PUBLISH_PAT != ''
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_PAT }}
+        run: |
+          # Configure auth for GitHub Packages (if needed)
+          npm publish --registry=https://npm.pkg.github.com
