@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280">
+  <defs>
+    <linearGradient id="flameGrad4" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#FF6A00" />
+      <stop offset="50%" stop-color="#FFA6A4" />
+      <stop offset="100%" stop-color="#FFD07A" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="280" fill="transparent"/>
+
+  <!-- Symbol left -->
+  <g transform="translate(40,20) scale(0.6)">
+    <use href="/icons/forge-x-symbol.svg"/>
+  </g>
+
+  <!-- Wordmark center -->
+  <g transform="translate(360,110)">
+    <text x="0" y="0" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="72" font-weight="700" fill="#222228">Forge</text>
+    <text x="220" y="0" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="72" font-weight="700" fill="#FF6A00">X</text>
+  </g>
+
+  <!-- Slogan right -->
+  <g transform="translate(620,200)">
+    <text x="0" y="0" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="26" fill="#888892">Build. Ship. Forge X.</text>
+  </g>
+</svg>
